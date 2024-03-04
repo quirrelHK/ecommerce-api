@@ -1,0 +1,5 @@
+__pycache__
+api_dev/
+.env
+app_old.py
+app_without_orm.py
