@@ -3,3 +3,5 @@ api_dev/
 .env
 app_old.py
 app_without_orm.py
+/tests/test_calculations.py
+/app/calculations.py
