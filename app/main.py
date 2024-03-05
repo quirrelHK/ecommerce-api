@@ -7,7 +7,7 @@ from .routers import user, post, auth, vote
 
 
 # Create the table, if table already exists then sqlalchemy does not touch it (for DB initialization you would want to use Alembic)
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
