@@ -46,3 +46,9 @@ def test_incorrect_login(client, test_user, email, password, status_code):
                       data={"username": email, "password": password})
     
     assert res.status_code == status_code
+    
+def test_user_conflict_user_already_exists(client, test_user):
+    res = client.post("/users/",
+                      json={"email": test_user["email"], "password": "somePassword"})
+    
+    assert res.status_code == 409
