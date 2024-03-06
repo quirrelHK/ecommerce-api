@@ -12,7 +12,7 @@ router = APIRouter(
 
 # request; Get method, url: /posts
 @router.get("/", response_model=List[schemas.PostOut])
-def get_posts(db: Session = Depends(get_db), current_user = Depends(oauth2.get_current_user), 
+def get_posts(db: Session = Depends(get_db), current_user: schemas.UserSession = Depends(oauth2.get_current_user), 
               limit: int = 10, skip: int = 0, search: Optional[str] = ""): # Using orm you need this session object wheneve you want to access the DB
     
 
@@ -26,7 +26,7 @@ def get_posts(db: Session = Depends(get_db), current_user = Depends(oauth2.get_c
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post) # Default status code changed, first validate the pydantic model and only show that to the user (prevent sharing unneccesary data)
-def create_post(post: schemas.PostCreate, db: Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)): # Extract all the fields from body and convert the python dictionary
+def create_post(post: schemas.PostCreate, db: Session = Depends(get_db), current_user: schemas.UserSession  = Depends(oauth2.get_current_user)): # Extract all the fields from body and convert the python dictionary
     '''
     Structure of data we expect; title str, content str
     '''
@@ -40,7 +40,7 @@ def create_post(post: schemas.PostCreate, db: Session = Depends(get_db), current
 
 # Fetch a single post
 @router.get("/{id}", response_model=schemas.PostOut)
-def get_post(id: int, db: Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)):   # FastAPI will automatically convert it to an integer; also validate the field, if it can be converted
+def get_post(id: int, db: Session = Depends(get_db), current_user: schemas.UserSession  = Depends(oauth2.get_current_user)):   # FastAPI will automatically convert it to an integer; also validate the field, if it can be converted
 
     # post = db.query(models.Post).filter(models.Post.id == id).first() # Find first instance and return that, save resources
 
@@ -59,7 +59,7 @@ def get_post(id: int, db: Session = Depends(get_db), current_user = Depends(oaut
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int,db: Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)):
+def delete_post(id: int,db: Session = Depends(get_db), current_user: schemas.UserSession  = Depends(oauth2.get_current_user)):
 
     post_query = db.query(models.Post).filter(models.Post.id == id)
 
@@ -80,7 +80,7 @@ def delete_post(id: int,db: Session = Depends(get_db), current_user = Depends(oa
 
 # Update all fields
 @router.put("/{id}", response_model=schemas.Post)
-def update_post(id: int, post: schemas.PostCreate, db: Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)):
+def update_post(id: int, post: schemas.PostCreate, db: Session = Depends(get_db), current_user: schemas.UserSession  = Depends(oauth2.get_current_user)):
 
     post_query = db.query(models.Post).filter(models.Post.id == id)
     original_post = post_query.first()

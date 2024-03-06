@@ -18,6 +18,11 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
     
+class UserSession(BaseModel):
+    id: int
+    email: EmailStr
+    created_at: datetime
+    
     
 # Schema of the data we expect, Does the validation
 class PostBase(BaseModel):
