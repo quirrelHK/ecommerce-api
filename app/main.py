@@ -12,7 +12,7 @@ from .routers import user, post, auth, vote
 
 app = FastAPI()
 
-origins = ["*"]
+origins = []
 
 # Allows our API to talk to different domains
 app.add_middleware(
