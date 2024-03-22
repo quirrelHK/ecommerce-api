@@ -6,7 +6,7 @@ The API and postgres database are deployed on render
 ## This API has four routes
 
 1. User route:\
-    For creating new users and searching users by their id
+    For creating new users,searching and deleting users by their id
 2. Post route:\
     This route is used for creating, updating, deleting and checking posts.
 3. Auth route:\

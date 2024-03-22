@@ -54,5 +54,5 @@ def delete_user(id: int, db: Session = Depends(get_db), current_user: schemas.Us
         
     user_query.delete(synchronize_session=False)
     db.commit()
-    
+ 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
