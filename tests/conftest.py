@@ -70,7 +70,7 @@ def test_user(client):
     assert res.status_code == 201
     new_user = res.json()
     new_user["password"] = user_data["password"]
-    return new_user
+    return new_user 
 
 
 
